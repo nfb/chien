@@ -56,11 +56,12 @@ func configureLogging() {
 }
 
 func main() {
+	configureLogging()
 	envBindAddr := os.Getenv("BINDADDR")
 	if envBindAddr != "" {
 		BINDADDR = envBindAddr
 	}
-	fmt.Println("Starting server, binding to " + BINDADDR)
+	slog.Info("Starting server, binding to " + BINDADDR)
 	http.HandleFunc("/*", catchall)
 	http.HandleFunc("/api/interactions", interactionHandler)
 	err := http.ListenAndServeTLS(BINDADDR, "cert.pem", "key.pem", nil)
