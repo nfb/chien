@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -11,9 +10,8 @@ import (
 var BINDADDR string = ":3000"
 
 func catchall(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r)
 	w.Write([]byte("meow"))
-	slog.Info("Caught Request")
+	slog.Info("catchall Caught " + r.Method + " request to: " + r.URL.Path)
 }
 
 func interactionHandler(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +29,6 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	fmt.Println(r)
 	w.Write([]byte("meow"))
 	slog.Info("Caught Request")
 }
