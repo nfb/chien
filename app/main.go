@@ -56,7 +56,7 @@ func configureLogging() {
 }
 
 func main() {
-	envBindAddr = os.Getenv("BINDADDR")
+	envBindAddr := os.Getenv("BINDADDR")
 	if envBindAddr != "" {
 		BINDADDR = envBindAddr
 	}
