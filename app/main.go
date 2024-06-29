@@ -15,5 +15,5 @@ func catchall(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("Starting...")
 	http.HandleFunc("/*", catchall)
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServeTLS(":3000", "key,pem", "cert.pem", nil)
 }
