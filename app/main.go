@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Starting...")
 	http.HandleFunc("/*", catchall)
 	http.HandleFunc("/api/interactions", interactionHandler)
-	err := http.ListenAndServeTLS(":3000", "cert.pem", "key.pem", nil)
+	err := http.ListenAndServeTLS(":443", "cert.pem", "key.pem", nil)
 	if err != nil {
 		slog.Error("TLS Server returned error: " + err.Error())
 	}
