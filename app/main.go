@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -31,6 +32,7 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Serverr", 500)
 			return
 		}
+		fmt.Println(i)
 
 		slog.Debug("Received Body: " + body)
 		if body == "PING" {
