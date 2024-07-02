@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"io"
 	"log/slog"
 	"net/http"
@@ -16,12 +17,20 @@ func catchall(w http.ResponseWriter, r *http.Request) {
 
 func interactionHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
+		i := Interaction{}
 		bodyb, err := io.ReadAll(r.Body)
 		if err != nil {
 			slog.Error("Failed to read body: " + err.Error())
 			http.Error(w, "Serverr", 500)
 			return
 		}
+		err = json.Unmarshal(bodyb, i)
+		if err != nil {
+			slog.Error("Failed to unmarshall body: " + err.Error())
+			http.Error(w, "Serverr", 500)
+			return
+		}
+
 		body := string(bodyb)
 		slog.Debug("Received Body: " + body)
 		if body == "PING" {
