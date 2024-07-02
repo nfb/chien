@@ -24,6 +24,7 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Serverr", 500)
 			return
 		}
+		body := string(bodyb)
 		err = json.Unmarshal(bodyb, i)
 		if err != nil {
 			slog.Error("Failed to unmarshall body: " + err.Error())
@@ -31,7 +32,6 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		body := string(bodyb)
 		slog.Debug("Received Body: " + body)
 		if body == "PING" {
 			w.Write([]byte("PONG"))
