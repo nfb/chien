@@ -25,7 +25,7 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		body := string(bodyb)
-		err = json.Unmarshal(bodyb, i)
+		err = json.Unmarshal(bodyb, &i)
 		if err != nil {
 			slog.Error("Failed to unmarshall body: " + err.Error())
 			http.Error(w, "Serverr", 500)
